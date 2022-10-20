@@ -1,5 +1,7 @@
 import { UserModel } from "../db/models/userModel.js"
+import { Jwt } from "jsonwebtoken";
 
+const secret = 'secret' //provisório
 export default {
     findAll: async (req, res) => {
         const result = await UserModel.findAll();
@@ -36,5 +38,20 @@ export default {
             message: 'New user created',
             payload: result
         })
+    },
+    login: async(req,res) => {
+        return UserModel.findOne({email: req.body.email})
+        .then(user => {
+            if(user.password === req.body.password){
+                return jwt.sign({name: user.name, email: user.email}, secret, (err, token) => {
+                    if(!err){
+                        res.status(201).json(token);
+                    }
+                    throw err;
+                });
+            }
+            throw new Error('falha ao logar')
+        })
+        .catch(err=> res.status(401).json(err.message));
     }
 }
