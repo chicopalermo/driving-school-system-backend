@@ -26,4 +26,23 @@ export class UserModel {
         
         return rows;
     }
+
+    static async create(user) {
+        let queryText, values;
+
+        queryText = `INSERT INTO "user" (name, cpf, email, password, phone, "roleId") VALUES ($1, $2, $3, $4, $5, $6)RETURNING name, cpf, email, phone, "roleId"`;
+
+        values = [
+            user.name,
+            user.cpf,
+            user.email,
+            user.password, 
+            user.phone, 
+            user.roleId
+        ]
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
 }
