@@ -45,4 +45,16 @@ export class UserModel {
         
         return rows;
     }
+
+    static async findByEmail(email) {
+        let queryText, values;
+
+        queryText = `SELECT * FROM "user" WHERE email = $1`;
+
+        values = [ email]
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
 }

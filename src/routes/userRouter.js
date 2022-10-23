@@ -4,6 +4,7 @@ import userController from "../controllers/userController.js";
 const userRouter = Router({ mergeParams: true });
 
 /*
+    POST users
     GET users
 */
 userRouter.route('/')
@@ -13,6 +14,6 @@ userRouter.route('/')
 /*
     POST Login
 */
-userRouter.route('/login').post(userController.login);
+// userRouter.route('/login').post(userController.login);
 
 export default userRouter;
