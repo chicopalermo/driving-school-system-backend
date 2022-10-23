@@ -21,6 +21,12 @@ export default {
             throw new Error('Email already in use');
         }
 
+        const roleNotExists = await RoleModel.findById(data.roleId);
+
+        if(roleNotExists.length === 0) {
+            throw new Error(`Role don't exists`);
+        }
+
         const user = new UserModel(
             data.name, 
             data.cpf,
