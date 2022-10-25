@@ -11,8 +11,7 @@ const pgConnection = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 20000,
-    ur
+    connectionTimeoutMillis: 20000
 });
 
 pgConnection.connect((err) => {
