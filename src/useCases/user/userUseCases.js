@@ -1,6 +1,7 @@
 import { Validator, validate } from "jsonschema"
 import userSchema from "./userSchema.js";
 import { UserModel } from "../../db/models/userModel.js";
+import { RoleModel } from "../../db/models/roleModel.js";
 
 export default {
     findAllUsersUseCase: async () => {
