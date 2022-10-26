@@ -1,7 +1,5 @@
 import userUseCases from "../useCases/user/userUseCases.js";
-// import { Jwt } from "jsonwebtoken";
 
-const secret = 'secret' //provisório
 export default {
     findAll: async (req, res) => {
         try {
@@ -39,19 +37,24 @@ export default {
             });
         }
     },
-    // login: async(req,res) => {
-    //     return UserModel.findOne({email: req.body.email})
-    //     .then(user => {
-    //         if(user.password === req.body.password){
-    //             return jwt.sign({name: user.name, email: user.email}, secret, (err, token) => {
-    //                 if(!err){
-    //                     res.status(201).json(token);
-    //                 }
-    //                 throw err;
-    //             });
-    //         }
-    //         throw new Error('falha ao logar')
-    //     })
-    //     .catch(err=> res.status(401).json(err.message));
-    // }
+
+    login: async(req,res) => {
+        try{
+            const data = req.body;
+
+            const result = await userUseCases.loginUseCase(data);
+
+            return res.status(200).json({
+                status: 'sucess',
+                message: 'login successfull',
+                payload: result
+            });
+        } catch (err){
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    }
 }

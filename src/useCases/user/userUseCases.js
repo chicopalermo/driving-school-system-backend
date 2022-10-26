@@ -1,7 +1,10 @@
-import { Validator, validate } from "jsonschema"
+import { Validator, validate } from "jsonschema";
 import userSchema from "./userSchema.js";
 import { UserModel } from "../../db/models/userModel.js";
 import { RoleModel } from "../../db/models/roleModel.js";
+import bcrypt from "bcrypt";
+import pkg from 'jsonwebtoken';
+const { Jwt } = pkg;
 
 export default {
     findAllUsersUseCase: async () => {
@@ -28,15 +31,33 @@ export default {
             throw new Error(`Role don't exists`);
         }
 
+        const passwordHash = await bcrypt.hash(data.password,10);
+
         const user = new UserModel(
             data.name, 
             data.cpf,
             data.email,
-            data.password,
+            passwordHash,
             data.phone,
             data.roleId
         );
 
         return await UserModel.create(user);
+    },
+    loginUseCase: async (data) => {
+        const user = await UserModel.findByEmail(data.email);
+
+        if(user.length <= 0){
+            throw new Error('falha ao logar, e-mail inválido usuário não encontrado')
+        }
+
+        if(await bcrypt.compare(data.password, user[0].password)){
+            const token = pkg.sign({name: user.name, email: user.email}, process.env.SECRET);
+            return token;
+        }
+        else{
+            throw new Error('falha ao logar, senha inválida')
+        }
+        
     }
 }

@@ -14,6 +14,6 @@ userRouter.route('/')
 /*
     POST Login
 */
-// userRouter.route('/login').post(userController.login);
+userRouter.route('/login').post(userController.login);
 
 export default userRouter;

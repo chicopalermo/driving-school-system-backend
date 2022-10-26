@@ -1,15 +1,15 @@
-// import { Jwt } from "jsonwebtoken";
-// const secret = 'secret'; // mudar, puxar do env
+import pkg from 'jsonwebtoken';
+const { Jwt } = pkg;
 
-// const jwtCheck = (req, res, next) => {
-//     const { token } = req.headers;
+const jwtCheck = (req, res, next) => {
+    const { token } = req.headers;
 
-//     return jwt.verify(token, secret, (err) => {
-//         if(!err){
-//             return next();
-//         }
-//         res.json({errors: [err.message]})
-//     });
-// };
+    return pkg.verify(token, process.env.SECRET, (err) => {
+        if(!err){
+            return next();
+        }
+        res.json({errors: [err.message]})
+    });
+};
 
-// module.exports = jwtCheck;
+ module.exports = jwtCheck;

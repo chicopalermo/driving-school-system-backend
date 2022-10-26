@@ -12,7 +12,6 @@ const pgConnection = new Pool({
     database: process.env.DB_NAME,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 20000,
-    ssl: { rejectUnauthorized: false }
 });
 
 pgConnection.connect((err) => {
