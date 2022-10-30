@@ -2,6 +2,7 @@ import { Validator, validate } from "jsonschema";
 import userSchema from "./userSchema.js";
 import { UserModel } from "../../db/models/userModel.js";
 import { RoleModel } from "../../db/models/roleModel.js";
+import { Mail } from "../../providers/mail.js";
 import bcrypt from "bcrypt";
 import pkg from 'jsonwebtoken';
 const { Jwt } = pkg;
@@ -31,7 +32,8 @@ export default {
             throw new Error(`Role não existe`);
         }
 
-        const passwordHash = await bcrypt.hash(data.password,10);
+        const password = Math.random().toString(36).slice(-8); 
+        const passwordHash = await bcrypt.hash(password, 10);
 
         const user = new UserModel(
             data.name, 
@@ -42,7 +44,18 @@ export default {
             data.roleId
         );
 
-        return await UserModel.create(user);
+        const result = await UserModel.create(user);
+
+        const message = new Mail(
+            "francisco@drakkar.com.br",
+            user.email,
+            "Seja bem-vindo ao sistema",
+            `Olá, <b>${user.name}</b> <br><br> Sua senha de acesso é: <b>${password}</b>`
+        );
+
+        await Mail.sendMail(message);
+
+        return result;
     },
     loginUseCase: async (data) => {
         const user = await UserModel.findByEmail(data.email);

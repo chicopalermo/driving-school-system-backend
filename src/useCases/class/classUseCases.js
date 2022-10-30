@@ -19,7 +19,7 @@ export default {
         const car = await CarModel.findByUserId(data.instructorId);
 
         if(car.length === 0) {
-            throw new Error('Usuário não possui carro');
+            throw new Error('Instrutor não possui carro');
         }
 
         const newClass = new ClassModel(data.classDate, data.startedAt, data.finishedAt, data.instructorId, car[0].carId);
