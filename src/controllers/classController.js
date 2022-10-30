@@ -1,13 +1,15 @@
-import roleUseCases from  "../useCases/role/roleUseCases.js"
+import classUseCases from  "../useCases/class/classUseCases.js"
 
 export default {
     findAll: async (req, res) => {
         try {
-            const result = await roleUseCases.findAllRolesUseCase();
+            const { available } = req.query;
+
+            const result = await classUseCases.findAllClassesUseCase(+available);
 
             return res.status(200).json({
                 status: 'success',
-                message: 'All roles retrived',
+                message: 'All classes retrived',
                 payload: result
             });
         } catch (err) {
@@ -22,11 +24,11 @@ export default {
         try {
             const data = req.body;
 
-            const result = await roleUseCases.createRoleUseCase(data);
+            const result = await classUseCases.createClassUseCase(data);
 
             return res.status(201).json({
                 status: 'success',
-                message: 'New role created',
+                message: 'New class created',
                 payload: result
             });
         } catch (err) {

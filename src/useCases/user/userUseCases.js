@@ -22,13 +22,13 @@ export default {
         const userAlreadyExists = await UserModel.findByEmail(data.email);
 
         if(userAlreadyExists.length > 0) {
-            throw new Error('Email already in use');
+            throw new Error('Email já está sendo usado');
         }
 
         const roleNotExists = await RoleModel.findById(data.roleId);
 
         if(roleNotExists.length === 0) {
-            throw new Error(`Role don't exists`);
+            throw new Error(`Role não existe`);
         }
 
         const passwordHash = await bcrypt.hash(data.password,10);
@@ -48,7 +48,7 @@ export default {
         const user = await UserModel.findByEmail(data.email);
 
         if(user.length <= 0){
-            throw new Error('falha ao logar, e-mail inválido usuário não encontrado')
+            throw new Error('Falha ao logar, e-mail inválido usuário não encontrado')
         }
 
         if(await bcrypt.compare(data.password, user[0].password)){
@@ -56,7 +56,7 @@ export default {
             return token;
         }
         else{
-            throw new Error('falha ao logar, senha inválida')
+            throw new Error('Falha ao logar, senha inválida')
         }
         
     }
