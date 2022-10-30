@@ -25,5 +25,9 @@ export default {
         const newClass = new ClassModel(data.classDate, data.startedAt, data.finishedAt, data.instructorId, car[0].carId);
 
         return await ClassModel.create(newClass);
+    },
+
+    deleteClassUseCase: async (classId) => {
+        return ClassModel.delete(classId);
     }
 }

@@ -33,6 +33,18 @@ export class ClassModel {
         return rows;
     }
 
+    static async delete(classId) {
+        let queryText, values;
+
+        queryText = `DELETE FROM "class" WHERE "classId"=$1`;
+
+        values = [ classId ];
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
+
     static async create(classData) {
         let queryText, values;
 
