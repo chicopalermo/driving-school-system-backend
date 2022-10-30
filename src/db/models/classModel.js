@@ -18,13 +18,29 @@ export class ClassModel {
     static async findAll(available) {
         let queryText;
 
-        queryText = `SELECT * FROM "class"`;
+        queryText = `SELECT cl."classId", cl."classDate", cl."startedAt", cl."finishedAt", cl."grades", cl."instructorId", u."name" AS "instructorName", cl."carId", ca."brand", ca."model", ca."year", cl."studentId", u2.name AS "studentName" 
+        FROM "class" cl
+        JOIN "user" u ON cl."instructorId" = u."userId"
+        JOIN "car" ca ON cl."carId" = ca."carId"
+        LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"`;
 
         if(available) {
             queryText += ' WHERE "studentId" IS NULL';
         }
 
         const { rows } = await pgConnection.query(queryText);
+        
+        return rows;
+    }
+
+    static async delete(classId) {
+        let queryText, values;
+
+        queryText = `DELETE FROM "class" WHERE "classId"=$1`;
+
+        values = [ classId ];
+
+        const { rows } = await pgConnection.query(queryText, values);
         
         return rows;
     }

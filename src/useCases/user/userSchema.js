@@ -6,11 +6,10 @@ const userSchema = {
             "name": {"type": "string"},
             "cpf": {"type": "string"},
             "email": {"type": "string"},
-            "password": {"type": "string"},
             "phone": {"type": "string"},
             "roleId": {"type": "integer"},
         },
-        "required": ["name", "cpf", "email", "password", "phone","roleId"]
+        "required": ["name", "cpf", "email", "phone","roleId"]
     }
 }
 

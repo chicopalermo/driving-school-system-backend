@@ -11,4 +11,10 @@ classRouter.route('/')
     .post(classController.create)
     .get(classController.findAll);
 
+/*
+    DELETE classes/:classId
+*/
+classRouter.route('/:classId')
+    .delete(classController.delete);
+
 export default classRouter;

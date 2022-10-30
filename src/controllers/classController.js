@@ -5,7 +5,7 @@ export default {
         try {
             const { available } = req.query;
 
-            const result = await classUseCases.findAllClassesUseCase(+available);
+            const result = await classUseCases.findAllClassesUseCase(available);
 
             return res.status(200).json({
                 status: 'success',
@@ -38,5 +38,24 @@ export default {
                 payload: null
             });
         }
-    }
+    },
+    delete: async (req, res) => {
+        try {
+            const { classId } = req.params;
+
+            const result = await classUseCases.deleteClassUseCase(+classId);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'Class deleted successfully',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    },
 }
