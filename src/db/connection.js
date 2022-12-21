@@ -12,7 +12,7 @@ const pgConnection = new Pool({
     database: process.env.DB_NAME,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 20000,
-    ssl: process.env.NODE_ENV === "prod" ? { rejectUnauthorized: false }: false
+    ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false }: false
 });
 
 pgConnection.connect((err) => {
