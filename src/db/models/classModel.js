@@ -80,4 +80,17 @@ export class ClassModel {
         
         return rows;
     }
+
+    static async update(classId, classData) {
+        let queryText, values;
+
+        queryText = `UPDATE "class" SET "classDate" = COALESCE($2, "classDate"), "startedAt" = COALESCE($3, "startedAt"), "finishedAt" = COALESCE($4, "finishedAt"), grades = COALESCE($5, grades), "instructorId" = COALESCE($6, "instructorId"), "studentId" = COALESCE($7, "studentId"),
+        "carId" = COALESCE($8, "carId") WHERE "classId"=$1`;
+
+        values = [ classId, classData.classDate, classData.startedAt, classData.finishedAt, classData.grades, classData.instructorId, classData.studentId, classData.carId ];
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
 }

@@ -8,7 +8,7 @@ import { jwtCheck } from "./middleware/jwtCheck.js";
 const router = Router();
 
 router.use('/auth', authRouter);
-router.use('/users', jwtCheck, userRouter);
+router.use('/users', userRouter);
 router.use('/roles', jwtCheck, roleRouter);
 router.use('/classes', jwtCheck, classRouter);
 
