@@ -9,8 +9,8 @@ const router = Router();
 
 router.use('/auth', authRouter);
 router.use('/users', userRouter);
-router.use('/roles', jwtCheck, roleRouter);
-router.use('/classes', jwtCheck, classRouter);
+router.use('/roles', roleRouter);
+router.use('/classes', classRouter);
 
 // Request made to non-existent resource
 router.use((req, res) => {
