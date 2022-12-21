@@ -13,8 +13,10 @@ classRouter.route('/')
 
 /*
     DELETE classes/:classId
+    PUT classes/:classId
 */
 classRouter.route('/:classId')
-    .delete(classController.delete);
+    .delete(classController.delete)
+    .put(classController.update);
 
 export default classRouter;

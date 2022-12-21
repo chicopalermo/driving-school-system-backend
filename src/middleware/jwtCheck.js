@@ -1,15 +1,16 @@
-import pkg from 'jsonwebtoken';
-const { Jwt } = pkg;
+import jwt from 'jsonwebtoken';
 
-const jwtCheck = (req, res, next) => {
+
+export const jwtCheck = (req, res, next) => {
     const { token } = req.headers;
 
-    return pkg.verify(token, process.env.SECRET, (err) => {
-        if(!err){
-            return next();
-        }
-        res.json({errors: [err.message]})
-    });
+    try {
+        jwt.verify(token, process.env.SECRET);
+        next();
+    } catch (err) {
+        return res.status(401).json({
+            status: 'error',
+            message: err.message,
+        });
+    }
 };
-
- module.exports = jwtCheck;

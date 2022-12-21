@@ -29,5 +29,25 @@ export default {
 
     deleteClassUseCase: async (classId) => {
         return ClassModel.delete(classId);
-    }
+    },
+
+    updateClassUseCase: async (classId, data) => {
+        const v = new Validator;
+        const errors = v.validate(data, classSchema.createSchema);
+
+        if(errors.length > 0) {
+            throw new Error(`Error in request's body ['${errors[0].property}']: ${errors[0].message}`);
+        }
+
+        
+        if(data.instructorId) {
+            const car = await CarModel.findByUserId(data.instructorId);
+
+            if(car.length === 0) {
+                throw new Error('Instrutor não possui carro');
+            }
+        }
+        
+        return await ClassModel.update(classId, data);
+    },
 }

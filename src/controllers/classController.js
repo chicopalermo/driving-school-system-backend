@@ -58,4 +58,24 @@ export default {
             });
         }
     },
+    update: async (req, res) => {
+        try {
+            const { classId } = req.params;
+            const data = req.body;
+
+            const result = await classUseCases.updateClassUseCase(+classId, data);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'Class updated successfully',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    },
 }
