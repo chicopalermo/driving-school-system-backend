@@ -50,4 +50,16 @@ export class RoleModel {
         
         return rows;
     }
+
+    static async addPermission(roleId, permissionId) {
+        let queryText, values;
+
+        queryText = `INSERT INTO "roleHasPermission" ("roleId", "permissionId") VALUES ($1, $2) RETURNING *`;
+
+        values = [ roleId, permissionId ]
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
 }

@@ -36,5 +36,25 @@ export default {
                 payload: null
             });
         }
+    },
+    addPermission: async (req, res) => {
+        try {
+            const { roleId } = req.params;
+            const { permissionId } = req.body;
+
+            const result = await roleUseCases.addPermissionUseCase(+roleId, permissionId);
+
+            return res.status(201).json({
+                status: 'success',
+                message: 'Permission Added',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
     }
 }

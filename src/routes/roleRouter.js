@@ -11,4 +11,10 @@ roleRouter.route('/')
     .post(roleController.create)
     .get(roleController.findAll);
 
+/*
+    POST /roles/:roleId
+*/
+roleRouter.route('/:roleId')
+    .post(roleController.addPermission);
+
 export default roleRouter;

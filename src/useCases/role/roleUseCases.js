@@ -1,4 +1,5 @@
 import { Validator, validate } from "jsonschema"
+import { PermissionModel } from "../../db/models/permissionModel.js";
 import { RoleModel } from "../../db/models/roleModel.js";
 import roleSchema from "./roleShema.js";
 
@@ -18,11 +19,26 @@ export default {
         const roleAlreadyExists = await RoleModel.findByName(data.name);
 
         if(roleAlreadyExists.length > 0) {
-            throw new Error('Role name already exists');
+            throw new Error('Nome da função já existe');
         }
 
         const role = new RoleModel(data.name);
 
         return await RoleModel.create(role);
+    },
+    addPermissionUseCase: async (roleId, permissionId) => {
+        const roleAlreadyExists = await RoleModel.findById(roleId);
+
+        if(roleAlreadyExists.length === 0) {
+            throw new Error('Função não existe');
+        }
+
+        const permissionAlreadyExists = await PermissionModel.findById(permissionId);
+
+        if(permissionAlreadyExists.length === 0) {
+            throw new Error('Permissão não existe');
+        }
+
+        return await RoleModel.addPermission(roleId, permissionId);
     }
 }
