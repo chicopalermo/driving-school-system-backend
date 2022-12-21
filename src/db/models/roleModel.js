@@ -62,4 +62,16 @@ export class RoleModel {
         
         return rows;
     }
+
+    static async findPermissionsByRole(roleId) {
+        let queryText, values;
+
+        queryText = `SELECT p."permissionId", p.name FROM "roleHasPermission" rp JOIN "permission" p ON rp."permissionId" = p."permissionId" WHERE "roleId" = $1`;
+
+        values = [ roleId ]
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
 }

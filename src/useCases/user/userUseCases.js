@@ -29,7 +29,7 @@ export default {
         const roleNotExists = await RoleModel.findById(data.roleId);
 
         if(roleNotExists.length === 0) {
-            throw new Error(`Role não existe`);
+            throw new Error(`Função não existe`);
         }
 
         const password = Math.random().toString(36).slice(-8); 
@@ -59,13 +59,25 @@ export default {
     },
     loginUseCase: async (data) => {
         const user = await UserModel.findByEmail(data.email);
-
+        
         if(user.length <= 0){
             throw new Error('Falha ao logar, e-mail inválido usuário não encontrado')
         }
 
         if(await bcrypt.compare(data.password, user[0].password)){
-            const token = pkg.sign({name: user.name, email: user.email}, process.env.SECRET);
+            const permissions = await RoleModel.findPermissionsByRole(user[0].roleId);
+            
+            const token = pkg.sign(
+                {
+                    userId: user[0].userId, 
+                    name: user[0].name, 
+                    email: user[0].email, 
+                    cpf: user[0].cpf, 
+                    phone: user[0].phone,
+                    roleId: user[0].roleId,
+                    roleName: user[0].roleName,
+                    permissions: permissions[0]
+                }, process.env.SECRET);
             return token;
         }
         else{

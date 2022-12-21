@@ -49,9 +49,9 @@ export class UserModel {
     static async findByEmail(email) {
         let queryText, values;
 
-        queryText = `SELECT * FROM "user" WHERE email = $1`;
+        queryText = `SELECT u."userId", u.name, u.email, u.cpf, u.password, u.phone, r."roleId", r.name AS "roleName" FROM "user" u JOIN "role" r ON u."roleId" = r."roleId" WHERE email = $1`;
 
-        values = [ email]
+        values = [email]
 
         const { rows } = await pgConnection.query(queryText, values);
         
