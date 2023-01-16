@@ -16,13 +16,13 @@ export default {
             throw new Error(`Error in request's body ['${errors[0].property}']: ${errors[0].message}`);
         }
 
-        const car = await CarModel.findByUserId(data.instructorId);
+        // const car = await CarModel.findByUserId(data.instructorId);
 
-        if(car.length === 0) {
-            throw new Error('Instrutor não possui carro');
-        }
+        // if(car.length === 0) {
+        //     throw new Error('Instrutor não possui carro');
+        // }
 
-        const newClass = new ClassModel(data.classDate, data.startedAt, data.finishedAt, data.instructorId, car[0].carId);
+        const newClass = new ClassModel(data.classDate, data.startedAt, data.finishedAt, data.instructorId, data.carId);
 
         return await ClassModel.create(newClass);
     },

@@ -57,4 +57,14 @@ export class UserModel {
         
         return rows;
     }
+
+    static async findAllInstructors() {
+        let queryText;
+
+        queryText = `SELECT u."userId", u.name, u.email, u.cpf, u.phone FROM "user" u JOIN "role" r ON u."roleId" = r."roleId" WHERE r.name = 'Instrutor'`;
+
+        const { rows } = await pgConnection.query(queryText);
+        
+        return rows;
+    }
 }

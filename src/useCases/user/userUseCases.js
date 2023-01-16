@@ -84,5 +84,9 @@ export default {
             throw new Error('Falha ao logar, senha inválida')
         }
         
-    }
+    },
+
+    findAllInstructorsUseCase: async () => {
+        return await UserModel.findAllInstructors();
+    },
 }
