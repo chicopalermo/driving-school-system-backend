@@ -40,5 +40,8 @@ export default {
         }
 
         return await RoleModel.addPermission(roleId, permissionId);
+    },
+    findPermissionsFromRoleUseCase: async (roleId) => {
+        return await RoleModel.findPermissionsFromRole(roleId);
     }
 }

@@ -65,7 +65,7 @@ export default {
         }
 
         if(await bcrypt.compare(data.password, user[0].password)){
-            const permissions = await RoleModel.findPermissionsByRole(user[0].roleId);
+            const permissions = await RoleModel.findPermissionsFromRole(user[0].roleId);
             
             const token = pkg.sign(
                 {

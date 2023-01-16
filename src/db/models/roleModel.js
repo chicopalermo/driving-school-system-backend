@@ -20,7 +20,7 @@ export class RoleModel {
 
         queryText = `INSERT INTO "role" (name) VALUES ($1) RETURNING *`;
 
-        values = [ role.name ]
+        values = [ role.name ];
 
         const { rows } = await pgConnection.query(queryText, values);
         
@@ -32,7 +32,7 @@ export class RoleModel {
 
         queryText = `SELECT * FROM "role" WHERE "roleId" = $1`;
 
-        values = [ roleId ]
+        values = [ roleId ];
 
         const { rows } = await pgConnection.query(queryText, values);
         
@@ -44,7 +44,7 @@ export class RoleModel {
 
         queryText = `SELECT * FROM "role" WHERE name = $1`;
 
-        values = [ name ]
+        values = [ name ];
 
         const { rows } = await pgConnection.query(queryText, values);
         
@@ -56,19 +56,19 @@ export class RoleModel {
 
         queryText = `INSERT INTO "roleHasPermission" ("roleId", "permissionId") VALUES ($1, $2) RETURNING *`;
 
-        values = [ roleId, permissionId ]
+        values = [ roleId, permissionId ];
 
         const { rows } = await pgConnection.query(queryText, values);
         
         return rows;
     }
 
-    static async findPermissionsByRole(roleId) {
+    static async findPermissionsFromRole(roleId) {
         let queryText, values;
 
         queryText = `SELECT p."permissionId", p.name FROM "roleHasPermission" rp JOIN "permission" p ON rp."permissionId" = p."permissionId" WHERE "roleId" = $1`;
 
-        values = [ roleId ]
+        values = [ roleId ];
 
         const { rows } = await pgConnection.query(queryText, values);
         

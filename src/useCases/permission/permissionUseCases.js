@@ -22,7 +22,7 @@ export default {
             throw new Error('Permission name already exists');
         }
 
-        const permission = new PermissionModel(data.name);
+        const permission = new PermissionModel(data.name, data.description);
 
         return await PermissionModel.create(permission);
     }
