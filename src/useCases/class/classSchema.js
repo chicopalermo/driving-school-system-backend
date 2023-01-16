@@ -6,9 +6,10 @@ const classSchema = {
             "classDate": {"type": "string"},
             "startedAt": {"type": "string"},
             "finishedAt": {"type": "string"},
+            "carId": {"type": "string"},
             "instructorId": {"type": "integer"}
         },
-        "required": ["startedAt", "finishedAt", "instructorId"]
+        "required": ["startedAt", "finishedAt", "carId", "instructorId"]
     },
     updateSchema: {
         "id": "/ClassUpdateSchema",

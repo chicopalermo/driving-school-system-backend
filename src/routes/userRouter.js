@@ -11,5 +11,9 @@ userRouter.route('/')
     .post(userController.create)
     .get(userController.findAll);
 
+/*
+    GET users/findAllInstructors
+*/
+userRouter.route('/findAllInstructors').get(userController.findAllInstructors);    
 
 export default userRouter;

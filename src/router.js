@@ -5,6 +5,7 @@ import userRouter from './routes/userRouter.js';
 import authRouter from "./routes/authRouter.js";
 import permissionRouter from "./routes/permissionRouter.js";
 import { jwtCheck } from "./middleware/jwtCheck.js";
+import carRouter from "./routes/carRouter.js";
 
 const router = Router();
 
@@ -13,6 +14,7 @@ router.use('/users', jwtCheck, userRouter);
 router.use('/roles', jwtCheck, roleRouter);
 router.use('/classes', jwtCheck, classRouter);
 router.use('/permissions', jwtCheck, permissionRouter);
+router.use('/cars', jwtCheck, carRouter);
 
 // Request made to non-existent resource
 router.use((req, res) => {

@@ -36,5 +36,22 @@ export default {
                 payload: null
             });
         }
-    }
+    },
+    findAllInstructors: async (req, res) => {
+        try {
+            const result = await userUseCases.findAllInstructorsUseCase();
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'All instructors retrived',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    },
 }
