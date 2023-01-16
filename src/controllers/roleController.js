@@ -56,5 +56,25 @@ export default {
                 payload: null
             });
         }
+    },
+
+    findPermissionsFromRole: async (req, res) => {
+        try {
+            const { roleId } = req.params;
+
+            const result = await roleUseCases.findPermissionsFromRoleUseCase(+roleId);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'All Permissions retrived',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
     }
 }

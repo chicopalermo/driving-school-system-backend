@@ -17,4 +17,9 @@ roleRouter.route('/')
 roleRouter.route('/:roleId')
     .post(roleController.addPermission);
 
+/*
+    GET roles/:roleId/findPermissionsFromRole
+*/
+roleRouter.route('/:roleId/findPermissionsFromRole').get(roleController.findPermissionsFromRole);
+
 export default roleRouter;
