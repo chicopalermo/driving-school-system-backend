@@ -18,7 +18,7 @@ export class ClassModel {
     static async findAll(available) {
         let queryText;
 
-        queryText = `SELECT cl."classId", TO_CHAR(cl."classDate", 'dd/mm/yyyy') AS "classDate", TO_CHAR(cl."startedAt", 'HH24:mm') AS "startedAt", TO_CHAR(cl."finishedAt", 'HH24:mm') AS "finishedAt", cl."grades", cl."instructorId", u."name" AS "instructorName", cl."carId", ca."brand", ca."model", ca."year", cl."studentId", u2.name AS "studentName" 
+        queryText = `SELECT cl."classId", TO_CHAR(cl."classDate", 'dd/mm/yyyy') AS "classDate", TO_CHAR(cl."startedAt", 'HH24:MI') AS "startedAt", TO_CHAR(cl."finishedAt", 'HH24:MI') AS "finishedAt", cl."grades", cl."instructorId", u."name" AS "instructorName", cl."carId", ca."brand", ca."model", ca."year", cl."studentId", u2.name AS "studentName" 
         FROM "class" cl
         JOIN "user" u ON cl."instructorId" = u."userId"
         JOIN "car" ca ON cl."carId" = ca."carId"
