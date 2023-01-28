@@ -23,7 +23,8 @@ export class ClassModel {
         JOIN "user" u ON cl."instructorId" = u."userId"
         JOIN "car" ca ON cl."carId" = ca."carId"
         LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"
-        WHERE cl."studentId" = $1`;
+        WHERE cl."studentId" = $1
+        ORDER BY cl."classDate"`;
 
         values = [ studentId ];
 
@@ -40,7 +41,8 @@ export class ClassModel {
         JOIN "user" u ON cl."instructorId" = u."userId"
         JOIN "car" ca ON cl."carId" = ca."carId"
         LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"
-        WHERE cl."instructorId" = $1 AND cl."studentId" IS NOT NULL"`;
+        WHERE cl."instructorId" = $1 AND cl."studentId" IS NOT NULL AND cl."grades" IS NULL
+        ORDER BY cl."classDate"`;
 
         values = [ instructorId ];
 
