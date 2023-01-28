@@ -40,7 +40,7 @@ export class ClassModel {
         JOIN "user" u ON cl."instructorId" = u."userId"
         JOIN "car" ca ON cl."carId" = ca."carId"
         LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"
-        WHERE cl."instructorId" = $1`;
+        WHERE cl."instructorId" = $1 AND cl."studentId" IS NOT NULL"`;
 
         values = [ instructorId ];
 
