@@ -1,6 +1,63 @@
 import classUseCases from  "../useCases/class/classUseCases.js"
 
 export default {
+    getStudentClasses: async (req, res) => {
+        try {
+            const { studentId } = req.params;
+
+            const result = await classUseCases.getStudentClassesUseCase(studentId);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'All classes for student retrived',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    },
+    getGradesByClass: async (req, res) => {
+        try {
+            const { instructorId } = req.params;
+
+            const result = await classUseCases.getInstructorClassesUseCase(instructorId);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'All classes for instructor retrived',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    },
+    getInstructorClasses: async (req, res) => {
+        try {
+            const { classId } = req.params;
+
+            const result = await classUseCases.getInstructorClassesUseCase(classId);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'All grades of class retrived',
+                payload: result
+            });
+        } catch (err) {
+            return res.status(400).json({
+                status: 'error',
+                message: err.message || 'Unexpeted error',
+                payload: null
+            });
+        }
+    },
     findAll: async (req, res) => {
         try {
             const { available } = req.query;

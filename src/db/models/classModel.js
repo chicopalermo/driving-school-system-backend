@@ -15,6 +15,52 @@ export class ClassModel {
         this.carId = carId;
     }
 
+    static async getStudentClasses(studentId) {
+        let queryText, values;
+
+        queryText = `SELECT cl."classId", TO_CHAR(cl."classDate", 'dd/mm/yyyy') AS "classDate", TO_CHAR(cl."startedAt", 'HH24:MI') AS "startedAt", TO_CHAR(cl."finishedAt", 'HH24:MI') AS "finishedAt", cl."grades", cl."instructorId", u."name" AS "instructorName", cl."carId", ca."brand", ca."model", ca."year", cl."studentId", u2.name AS "studentName" 
+        FROM "class" cl
+        JOIN "user" u ON cl."instructorId" = u."userId"
+        JOIN "car" ca ON cl."carId" = ca."carId"
+        LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"
+        WHERE cl."studentId" = $1`;
+
+        values = [ studentId ];
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
+
+    static async getInstructorClasses(instructorId) {
+        let queryText, values;
+
+        queryText = `SELECT cl."classId", TO_CHAR(cl."classDate", 'dd/mm/yyyy') AS "classDate", TO_CHAR(cl."startedAt", 'HH24:MI') AS "startedAt", TO_CHAR(cl."finishedAt", 'HH24:MI') AS "finishedAt", cl."grades", cl."instructorId", u."name" AS "instructorName", cl."carId", ca."brand", ca."model", ca."year", cl."studentId", u2.name AS "studentName" 
+        FROM "class" cl
+        JOIN "user" u ON cl."instructorId" = u."userId"
+        JOIN "car" ca ON cl."carId" = ca."carId"
+        LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"
+        WHERE cl."instructorId" = $1`;
+
+        values = [ instructorId ];
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
+
+    static async getGradesClass(classId) {
+        let queryText, values;
+
+        queryText = `SELECT grades FROM "class" WHERE "classId" =$1`;
+
+        values = [ classId ];
+
+        const { rows } = await pgConnection.query(queryText, values);
+        
+        return rows;
+    }
+
     static async findAll(available) {
         let queryText;
 

@@ -4,6 +4,15 @@ import { CarModel } from "../../db/models/carModel.js";
 import classSchema from "./classSchema.js";
 
 export default {
+    getStudentClassesUseCase: async (studentId) => {
+        return await ClassModel.getStudentClasses(studentId);
+    },
+    getInstructorClassesUseCase: async (instructorId) => {
+        return await ClassModel.getInstructorClasses(instructorId);
+    },
+    getGradesByClassUseCase: async (classId) => {
+        return await ClassModel.getGradesClass(classId);
+    },
     findAllClassesUseCase: async (available) => {
         return await ClassModel.findAll(available);
     },

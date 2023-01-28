@@ -19,4 +19,19 @@ classRouter.route('/:classId')
     .delete(classController.delete)
     .put(classController.update);
 
+/*
+    GET classes/getGrades/:classId
+*/
+classRouter.route('/getGrades/:classId').get(classController.getGradesByClass);
+
+/*
+    GET classes/getInstructorClasses/:instructorId
+*/
+classRouter.route('/getInstructorClasses/:instructorId').get(classController.getGradesByClass);
+
+/*
+    GET classes/getStudentClasses/:studentId
+*/
+classRouter.route('/getStudentClasses/:studentId').get(classController.getStudentClasses);
+
 export default classRouter;
