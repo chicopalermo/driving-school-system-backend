@@ -41,7 +41,7 @@ export class ClassModel {
         JOIN "user" u ON cl."instructorId" = u."userId"
         JOIN "car" ca ON cl."carId" = ca."carId"
         LEFT JOIN "user" u2 ON cl."studentId" = u2."userId"
-        WHERE cl."instructorId" = 4 AND cl."studentId" IS NOT NULL AND cl."grades" IS NULL AND (cl."classDate" <= DATE(NOW()) AND cl."finishedAt" <= current_time at time zone 'America/Sao_Paulo')
+        WHERE cl."instructorId" = $1 AND cl."studentId" IS NOT NULL AND cl."grades" IS NULL AND (cl."classDate" <= DATE(NOW()) AND cl."finishedAt" <= current_time at time zone 'America/Sao_Paulo')
         ORDER BY cl."classDate"`;
 
         values = [ instructorId ];
