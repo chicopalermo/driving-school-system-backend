@@ -27,7 +27,7 @@ classRouter.route('/getGrades/:classId').get(classController.getGradesByClass);
 /*
     GET classes/getInstructorClasses/:instructorId
 */
-classRouter.route('/getInstructorClasses/:instructorId').get(classController.getGradesByClass);
+classRouter.route('/getInstructorClasses/:instructorId').get(classController.getInstructorClasses);
 
 /*
     GET classes/getStudentClasses/:studentId

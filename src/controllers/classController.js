@@ -41,9 +41,9 @@ export default {
     },
     getInstructorClasses: async (req, res) => {
         try {
-            const { classId } = req.params;
+            const { instructorId } = req.params;
 
-            const result = await classUseCases.getInstructorClassesUseCase(classId);
+            const result = await classUseCases.getInstructorClassesUseCase(instructorId);
 
             return res.status(200).json({
                 status: 'success',
