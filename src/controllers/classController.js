@@ -22,9 +22,9 @@ export default {
     },
     getGradesByClass: async (req, res) => {
         try {
-            const { instructorId } = req.params;
+            const { classId } = req.params;
 
-            const result = await classUseCases.getInstructorClassesUseCase(instructorId);
+            const result = await classUseCases.getGradesByClassUseCase(classId);
 
             return res.status(200).json({
                 status: 'success',
