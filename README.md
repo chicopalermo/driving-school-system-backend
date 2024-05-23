@@ -1,4 +1,5 @@
 # API Rest para controle de Autoescola
+Projeto de Software para Autoescolas.
 
 ## 📖 Descrição
 Este projeto completo de aplicativo mobile foi realizado para a disciplina de Projeto de Software na Universidade Federal de Santa Maria
