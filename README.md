@@ -5,7 +5,7 @@ Projeto de Software para Autoescolas.
 Este projeto completo de aplicativo mobile foi realizado para a disciplina de Projeto de Software na Universidade Federal de Santa Maria
 
 ## 🛠️ Funcionalidades
-Existem três tipos de usuários com permissões diferentes: Aluno, Instrutor e Admkinistrador.
+Existem três tipos de usuários com permissões diferentes: Aluno, Instrutor e Administrador.
 
 Aluno: 
 - Agendamento de aulas
