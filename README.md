@@ -11,16 +11,19 @@ Aluno:
 - Agendamento de aulas
 - Visualização das aulas
 - Visualização da avaliação feita pelo instrutor naquela aula
+  
 https://github.com/chicopalermo/driving-school-system-backend/assets/47536129/0cce05bc-1ead-4507-b06a-87478767c6de
 
 Instrutor: 
 - Visualização das aulas, caso já tenha ocorrido, a opção de avaliar a aula irá ficar disponível ao instrutor, dando notas de 0 a 10 em cada competência ao aluno
+  
 https://github.com/chicopalermo/driving-school-system-backend/assets/47536129/d4192b62-51e9-4f89-9a56-2323be6c9271
 
 Administrador: 
 - Responsável por criar as aulas, selecionando a data, horário, instrutor e carro, disponibilizando as aulas aos alunos para que possam agendar ou não.
 - Cadastro de instrutores
 - Cadastro de alunos
+  
 https://github.com/chicopalermo/driving-school-system-backend/assets/47536129/9af85937-68ac-4d71-89f2-69da11991e4d
 
 ## 📡 Tecnologias utilizadas
