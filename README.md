@@ -1,9 +1,9 @@
 # API Rest para controle de Autoescola
 
-## ![image](https://github.com/chicopalermo/driving-school-system-backend/assets/47536129/c1cd9add-c45f-408a-8468-6f066e190da7) Descrição
+## 📖 Descrição
 Este projeto completo de aplicativo mobile foi realizado para a disciplina de Projeto de Software na Universidade Federal de Santa Maria
 
-## ![image](https://github.com/chicopalermo/driving-school-system-backend/assets/47536129/90158ff9-4488-4ddc-940d-d96911144592) Funcionalidades
+## 🛠️ Funcionalidades
 Existem três tipos de usuários com permissões diferentes: Aluno, Instrutor e Admkinistrador.
 
 Aluno: 
